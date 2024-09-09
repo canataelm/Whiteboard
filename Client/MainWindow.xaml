@@ -1,0 +1,196 @@
+﻿<Window
+    x:Class="Client.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Client"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    Title="Main Window"
+    Width="800"
+    Height="450"
+    Background="#F0F4F8"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <!--  Güncellenmiş Buton Stili  -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#007ACC" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005A9E" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  Güncellenmiş RadioButton Stili  -->
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#005A9E" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <!--  Güncellenmiş Label Stili  -->
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="#005A9E" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#F0F4F8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  Üst sol köşede yer alan butonlar  -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Orientation="Horizontal">
+            <xctk:ColorPicker
+                x:Name="PenColorPicker"
+                Width="120"
+                Height="30"
+                Margin="1"
+                HorizontalAlignment="Left"
+                ColorMode="ColorCanvas"
+                DisplayColorAndName="True"
+                FontSize="14"
+                RenderTransformOrigin="0.485,0.197"
+                SelectedColor="Black"
+                SelectedColorChanged="PenColorPicker_SelectedColorChanged"
+                ShowStandardColors="False"
+                UsingAlphaChannel="False" />
+            <Button
+                x:Name="PenButton"
+                Width="70"
+                Height="30"
+                Click="PenButton_Click"
+                Content="Pen"
+                Style="{DynamicResource ButtonStyle}" />
+            <Button
+                x:Name="HighlighterButton"
+                Width="70"
+                Height="30"
+                Click="Highlighter_Click"
+                Content="Highlighter"
+                Style="{DynamicResource ButtonStyle}" />
+            <Button
+                x:Name="SelectButton"
+                Width="70"
+                Height="30"
+                Click="SelectButton_Click"
+                Content="Select"
+                Style="{DynamicResource ButtonStyle}" />
+            <Button
+                x:Name="EraseButton"
+                Width="70"
+                Height="30"
+                Click="EraseButton_Click"
+                Content="Erase"
+                Style="{DynamicResource ButtonStyle}" />
+        </StackPanel>
+
+        <!--  Sol kenarda yer alan ayarlar ve butonlar  -->
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="116"
+            Margin="0,3,0,3"
+            HorizontalAlignment="Left"
+            Orientation="Vertical">
+            <RadioButton
+                x:Name="PointEraserRadio"
+                Margin="5"
+                VerticalContentAlignment="Top"
+                Click="PointEraserRadio_Click"
+                Content="Point eraser"
+                IsChecked="True"
+                Style="{DynamicResource RadioButtonStyle}" />
+            <RadioButton
+                x:Name="FullEraserRadio"
+                Margin="5"
+                VerticalAlignment="Top"
+                Click="FullEraserRadio_Click"
+                Content="Full eraser"
+                Style="{DynamicResource RadioButtonStyle}" />
+            <Label Content="Pen thickness" Style="{DynamicResource LabelStyle}" />
+            <Slider
+                x:Name="ThicknesSlider"
+                Margin="5"
+                IsSnapToTickEnabled="True"
+                Maximum="5"
+                Minimum="1"
+                ValueChanged="ThicknesSlider_ValueChanged"
+                Value="2" />
+            <Label Content="Eraser thickness" Style="{DynamicResource LabelStyle}" />
+            <Slider
+                x:Name="EraserThicknesSlider"
+                Margin="5"
+                IsSnapToTickEnabled="True"
+                Maximum="100"
+                Minimum="1"
+                ValueChanged="EraserThicknesSlider_ValueChanged"
+                Value="2" />
+            <Button
+                x:Name="LeaveButton"
+                Width="95"
+                Height="20"
+                Margin="5"
+                Click="LeaveButton_Click"
+                Content="Leave"
+                Style="{DynamicResource ButtonStyle}" />
+            <Button
+                x:Name="button_edit"
+                Width="95"
+                Height="20"
+                Click="button_Load_Click"
+                Content="Load"
+                Style="{DynamicResource ButtonStyle}" />
+            <Button
+                Width="95"
+                Height="20"
+                Click="SaveButton_Click"
+                Content="Save"
+                RenderTransformOrigin="0.792,0.495"
+                Style="{DynamicResource ButtonStyle}" />
+        </StackPanel>
+
+        <!--  Ortadaki InkCanvas  -->
+        <InkCanvas
+            x:Name="inkCanvas"
+            Grid.Row="1"
+            Grid.Column="0"
+            Background="White"
+            EditingMode="Ink"
+            EditingModeInverted="Ink"
+            MouseLeftButtonUp="inkCanvas_MouseLeftButtonUp">
+            <InkCanvas.DefaultDrawingAttributes>
+                <DrawingAttributes Width="6" Height="5" />
+            </InkCanvas.DefaultDrawingAttributes>
+        </InkCanvas>
+    </Grid>
+</Window>
